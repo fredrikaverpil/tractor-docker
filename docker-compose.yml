@@ -16,7 +16,6 @@ dbdata:
   image: tractordocker_image
   container_name: tractor_dbdata
   hostname: tractor-dbdata
-  restart: always
   volumes:
     - /var/spool/tractor
 
@@ -36,7 +35,7 @@ engine:
 
 blade:
   image: tractordocker_image
-  container_name: tractor_blade
+  container_name: tractor_blade # prevents scaling if uncommented
   hostname: tractor-blade
   restart: always
   links:
