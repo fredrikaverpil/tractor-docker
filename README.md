@@ -37,7 +37,7 @@ Please note that if you rename the `tractor-docker` directory, the quickstart be
 
 #####  2. Prepare the RPMs, Pixar license and Tractor configuration.
 
-* Put the Tractor and PixarLicense server RPMs inside the `tractor-docker/tractor` folder.
+* Put the Tractor and PixarLicense server RPMs inside the `tractor-docker/tractor/assets` folder.
 * Put your pixar.license file into the `tractor-docker/tractor/assets` folder.
 * Copy your Tractor configuration into the `tractor-docker/tractor/assets/custom_config` folder.
 
