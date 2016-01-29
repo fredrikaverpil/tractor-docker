@@ -75,8 +75,7 @@ This will create and start the `pixar_license`, `tractor_dbdata`, `tractor_engin
 
 ##### 8. Figure out the IP address used to access the Tractor Engine
 
-OS X: `docker-machine ip`  
-Windows: `docker-machine ip`
+    docker inspect tractor_engine | grep IPAddress
 
 
 ##### 9. Stop all containers
