@@ -1,0 +1,44 @@
+image:
+  container_name: tractor_image
+  build: tractor
+
+license:
+  image: tractordocker_image
+  container_name: pixar_license
+  hostname: pixar-license
+  restart: always
+  #mac_address:
+  ports:
+    - "9010:9010"
+  command: /opt/pixar/PixarLicense-LA-11.0/PixarLicenseServer -x /opt/pixar/pixar.license -log /var/tmp/pixar-license.log
+
+dbdata:
+  image: tractordocker_image
+  container_name: tractor_dbdata
+  hostname: tractor-dbdata
+  restart: always
+  volumes:
+    - /var/spool/tractor
+
+engine:
+  image: tractordocker_image
+  container_name: tractor_engine
+  hostname: tractor-engine
+  restart: always
+  ports:
+    - "80:80"
+    - "9005:9005"
+  links:
+    - license
+  volumes_from:
+    - dbdata
+  command: /opt/pixar/Tractor-2.2/bin/tractor-engine --configdir=/opt/pixar/Tractor-2.2/custom_config --log=/var/tmp/engine.log --debug --verbose
+
+blade:
+  image: tractordocker_image
+  container_name: tractor_blade
+  hostname: tractor-blade
+  restart: always
+  links:
+    - engine
+  command: /opt/pixar/Tractor-2.2/bin/tractor-blade --log=/var/tmp/engine.log --engine=tractor-engine --debug --verbose
