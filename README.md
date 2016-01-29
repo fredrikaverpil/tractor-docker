@@ -2,7 +2,7 @@
 
 Run [Pixar's Tractor](https://renderman.pixar.com/view/pixars-tractor) using [Docker](https://www.docker.com) containers.
 
-This [Docker Compose file](https://docs.docker.com/compose/) will create a series of containers which are all based on the same image:
+A [Docker Compose file](https://docs.docker.com/compose/) will create a series of containers which are all based on the same [Docker image](https://docs.docker.com/engine/userguide/dockerimages/):
 * `pixar_license` - the Pixar License server, required for Tractor to dispatch work
 * `tractor_dbdata` - persistent database data, stored in a Docker volume
 * `tractor_engine` - the Tractor Engine server
