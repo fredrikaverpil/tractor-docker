@@ -1,5 +1,4 @@
 FROM centos:6
-MAINTAINER Fredrik Averpil <fredrik.averpil@gmail.com>
 
 # Pixar license server
 COPY assets/PixarLicense-LA-11.0_1457011-linuxRHEL6_gcc44icc121.x86_64.rpm /tmp/PixarLicense.rpm
