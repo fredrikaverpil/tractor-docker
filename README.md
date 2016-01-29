@@ -1,12 +1,19 @@
 # tractor-docker
 
-Run [Pixar's Tractor](https://renderman.pixar.com/view/pixars-tractor) in a [Docker](https://www.docker.com) container.
+Run [Pixar's Tractor](https://renderman.pixar.com/view/pixars-tractor) using [Docker](https://www.docker.com) containers.
 
-This [Docker Compose file](https://docs.docker.com/compose/) will create these containers which are all based on the same image:
+This [Docker Compose file](https://docs.docker.com/compose/) will create a series of containers which are all based on the same image:
 * `pixar_license` - the Pixar License server, required for Tractor to dispatch work
 * `tractor_dbdata` - persistent database data, stored in a Docker volume
 * `tractor_engine` - the Tractor Engine server
 * `tractor_blade` - a Tractor Blade
+
+
+### Jeez... ok, so how does this work?
+
+Basically, this will set up everything which is required for Tractor to run, provided you can bring your own RPMs and license (you're a Pixar Tractor customer).
+
+It's really not that complicated. First, check out the `Dockerfile`. We create all containers based on this. Then check out `docker-compose.yml` on which command is being run for each container. That's it, with wide brush strokes, really.
 
 
 ### Notes on customizing the implementation
