@@ -9,14 +9,14 @@ A [Docker Compose file](https://docs.docker.com/compose/) will create a series o
 * `tractor_blade` - a Tractor Blade
 
 
-### Jeez... ok, so how does this work?
+## Jeez... ok, so how does this work?
 
 Basically, this will set up everything which is required for Tractor to run, provided you can bring your own RPMs and license (you're a Pixar Tractor customer).
 
 It's really not that complicated. First, check out the `Dockerfile`. We create all containers based on this. Then check out `docker-compose.yml` on which command is being run for each container. That's it, with wide brush strokes, really.
 
 
-### Notes on customizing the implementation
+## Notes on customizing the implementation
 
 You may want to change the licensing approach. Maybe you already have a Pixar License Server running somewhere in your network. In this case, you can omit the `license` container block in `docker-compose.yml` and add the `9010` port to the `engine` container block.
 
@@ -30,7 +30,7 @@ Please note that if you rename the `tractor-docker` directory, the quickstart be
 
 
 
-### Quickstart
+## Quickstart
 
 #####  1. Download the project:
 
@@ -87,7 +87,7 @@ This will create and start the `pixar_license`, `tractor_data`, `tractor_engine`
     docker-compose stop
 
 
-### Useful commands
+## Useful commands
 
 
 ##### Enter a running container
