@@ -22,6 +22,8 @@ You may want to change the licensing approach. Maybe you already have a Pixar Li
 
 You may also want to change the behavior of the Docker volume which holds the Tractor Engine database data. The recommended approach by Docker is to generally keep database data persistent, so that it doesn't get deleted if the container is restarted. You might wish to map such a Docker volume to an actual location on the Docker host.
 
+Using the default container setup, you can enter the `tractor_engine` container and edit the config files. If you wish, you may change this approach by adding a volume to the `tractor_engine` container in order to make these files editable outside of the container.
+
 The `tractor_blade` currently isn't really doing any good and is only supposed to exist to show an example implementation. You might want to base this off another Docker image, or equip the existing Tractor Docker image with additional software. Maybe you you would rather run a Tractor blade from within the `tractor_engine` container. Please note that you shouldn't define a hostname for the `tractor_blade` container if you plan on scaling this container using e.g. `docker-compose blade scale=10`. If you do this, all such blades will share the same hostname and only one blade will show in Tractor Engine. Also, if you wish to scale the blade service, you must comment out its `container_name` attribute in `docker-compose.yml`.
 
 Please note that if you rename the `tractor-docker` directory, the quickstart below will fail.
@@ -88,6 +90,8 @@ This will create and start the `pixar_license`, `tractor_dbdata`, `tractor_engin
 
 
 ##### Enter a running container
+
+This is useful for e.g. entering the `tractor_engine` container in order to modify the configuration files.
 
     docker exec -i -t CONTAINER_NAME /bin/bash
 
