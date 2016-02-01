@@ -92,8 +92,6 @@ This will create and start the `pixar_license`, `tractor_data`, `tractor_engine`
 
 ##### Enter a running container
 
-This is useful for e.g. entering the `tractor_engine` container in order to modify the configuration files.
-
     docker exec -i -t CONTAINER_NAME /bin/bash
 
 ##### List all running containers
