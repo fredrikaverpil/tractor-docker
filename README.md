@@ -108,4 +108,7 @@ This will create and start the `pixar_license`, `tractor_data`, `tractor_engine`
 
 
 
+## To-do
 
+* Ability to set static IP to container (requires [Docker 1.10](https://github.com/docker/docker/releases))
+* Auto-purge of old task logs and old jobs to avoid running out of disk space too quickly...
