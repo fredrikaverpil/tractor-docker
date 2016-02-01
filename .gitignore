@@ -1,0 +1,14 @@
+# License and RPM files
+*.license
+*.rpm
+
+# Config files
+*.config
+*.conf
+*.envkeys
+*.js
+*.py
+menu-scripts
+
+# Include overrides
+!tractor.config

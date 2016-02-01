@@ -1,7 +1,17 @@
-image:
-  container_name: tractor_image
-  #image: tractordocker_image # requires compose 1.6
+image:  
   build: tractor
+  #image: tractordocker_image # requires compose 1.6
+  container_name: tractor_image
+  volumes:
+    - ./tractor/assets:/opt/pixar/assets:ro
+
+data:
+  image: tractordocker_image
+  container_name: tractor_data
+  hostname: tractor-data
+  volumes:
+    - ./tractor/assets:/opt/pixar/assets:ro
+    - /var/spool/tractor
 
 license:
   image: tractordocker_image
@@ -11,14 +21,9 @@ license:
   #mac_address: xx:xx:xx:xx:xx:xx # could be used to set specific mac address
   ports:
     - "9010:9010"
-  command: /opt/pixar/PixarLicense-LA-11.0/PixarLicenseServer -x /opt/pixar/pixar.license -log /var/tmp/pixar-license.log
-
-dbdata:
-  image: tractordocker_image
-  container_name: tractor_dbdata
-  hostname: tractor-dbdata
-  volumes:
-    - /var/spool/tractor
+  volumes_from:
+    - data
+  command: /opt/pixar/PixarLicense-LA-11.0/PixarLicenseServer -x /opt/pixar/assets/pixar.license -log /var/tmp/pixar-license.log
 
 engine:
   image: tractordocker_image
@@ -31,8 +36,8 @@ engine:
   links:
     - license
   volumes_from:
-    - dbdata
-  command: /opt/pixar/Tractor-2.2/bin/tractor-engine --configdir=/opt/pixar/Tractor-2.2/custom_config --log=/var/tmp/engine.log --debug --verbose
+    - data
+  command: /opt/pixar/Tractor-2.2/bin/tractor-engine --configdir=/opt/pixar/assets/custom_config --log=/var/tmp/engine.log --debug --verbose
 
 blade:
   image: tractordocker_image

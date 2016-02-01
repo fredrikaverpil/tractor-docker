@@ -1,15 +1,14 @@
 FROM centos:6
 
+# Map local assets folder to /opt/pixar/assets
+ADD ./assets /opt/pixar/assets
+
 # Pixar license server
-COPY assets/PixarLicense-LA-11.0_1457011-linuxRHEL6_gcc44icc121.x86_64.rpm /tmp/PixarLicense.rpm
-RUN rpm -ivh /tmp/PixarLicense.rpm
-COPY assets/pixar.license /opt/pixar/pixar.license
+RUN rpm -ivh /opt/pixar/assets/PixarLicense-LA-11.0_1457011-linuxRHEL6_gcc44icc121.x86_64.rpm
 EXPOSE 9010
 
 # Tractor
-COPY assets/Tractor-2.2_1564321-linuxRHEL6_gcc44icc121.x86_64.rpm /tmp/Tractor.rpm
-RUN rpm -ivh /tmp/Tractor.rpm
-COPY assets/custom_config /opt/pixar/Tractor-2.2/custom_config
+RUN rpm -ivh /opt/pixar/assets/Tractor-2.2_1572682-linuxRHEL6_gcc44icc121.x86_64.rpm
 EXPOSE 80
 EXPOSE 9005
 
