@@ -70,7 +70,7 @@ This will build the container image `tractor-image`.
 
 ##### 7. Run the compose
 
-This will create and start the `pixar-license`, `tractor-data`, `tractor-engine` and `tractor-blade` containers based on the `tractor_image` container image.
+This will create and start the `pixar-license`, `tractor-data`, `tractor-engine` and `tractor-blade` containers based on the `tractor-image` container image.
 
     cd tractor-docker
     docker-compose up
@@ -100,7 +100,7 @@ This will create and start the `pixar-license`, `tractor-data`, `tractor-engine`
 
 ##### Remove the data container along with its volume data
 
-    docker rm -v tractor_data
+    docker rm -v tractor-data
 
 ##### Backup database data
 
