@@ -1,49 +1,52 @@
-image:  
-  build: tractor
-  #image: tractordocker_image # requires compose 1.6
-  container_name: tractor_image
-  volumes:
-    - ./tractor/assets:/opt/pixar/assets:ro
+version: "2"
 
-data:
-  image: tractordocker_image
-  container_name: tractor_data
-  hostname: tractor-data
-  volumes:
-    - ./tractor/assets:/opt/pixar/assets:ro
-    - /var/spool/tractor
+services:
+    image:
+      build: .
+      image: tractor_image:2.2.1590950
+      container_name: tractor-image
+      volumes:
+        - ./assets/opt/pixar/rpms:/opt/pixar/rpms:ro
 
-license:
-  image: tractordocker_image
-  container_name: pixar_license
-  hostname: pixar-license
-  restart: always
-  #mac_address: xx:xx:xx:xx:xx:xx # could be used to set specific mac address
-  ports:
-    - "9010:9010"
-  volumes_from:
-    - data
-  command: /opt/pixar/PixarLicense-LA-11.0/PixarLicenseServer -x /opt/pixar/assets/pixar.license -log /var/tmp/pixar-license.log
+    data:
+      image: tractor_image:2.2.1590950
+      container_name: tractor-data
+      hostname: tractor-data
+      volumes:
+        - /var/spool/tractor
+        - ./assets/var/log:/var/log
+        - ./assets/etc/supervisor:/etc/supervisor
+        - ./assets/opt/pixar/license:/opt/pixar/license
+        - ./assets/opt/pixar/config:/opt/pixar/config
 
-engine:
-  image: tractordocker_image
-  container_name: tractor_engine
-  hostname: tractor-engine
-  restart: always
-  ports:
-    - "80:80"
-    - "9005:9005"
-  links:
-    - license
-  volumes_from:
-    - data
-  command: /opt/pixar/Tractor-2.2/bin/tractor-engine --configdir=/opt/pixar/assets/custom_config --log=/var/tmp/engine.log --debug --verbose
+    license:
+      image: tractor_image:2.2.1590950
+      container_name: pixar-license
+      hostname: pixar-license
+      restart: always
+      # mac_address: xx:xx:xx:xx:xx:xx # could be used to set specific mac address
+      ports:
+        - "9010:9010"
+      volumes_from:
+        - data
+      command: /opt/pixar/PixarLicense-LA-11.0/PixarLicenseServer -x /opt/pixar/license/pixar.license -log /var/log/pixar-license.log
 
-blade:
-  image: tractordocker_image
-  container_name: tractor_blade # prevents scaling if uncommented
-  hostname: tractor-blade
-  restart: always
-  links:
-    - engine
-  command: /opt/pixar/Tractor-2.2/bin/tractor-blade --log=/var/tmp/engine.log --engine=tractor-engine --debug --verbose
+    engine:
+      image: tractor_image:2.2.1590950
+      container_name: tractor-engine
+      hostname: tractor-engine
+      restart: always
+      ports:
+        - "80:80"
+        - "9005:9005"
+      volumes_from:
+        - data
+      command: /opt/pixar/Tractor-2.2/bin/tractor-engine --configdir=/opt/pixar/config --log=/var/log/engine.log --debug --verbose
+      #command: /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+
+    blade:
+      image: tractor_image:2.2.1590950
+      container_name: tractor-blade # prevents scaling if uncommented
+      hostname: tractor-blade
+      restart: always
+      command: /opt/pixar/Tractor-2.2/bin/tractor-blade --log=/var/log/blade.log --engine=tractor-engine --debug --verbose
