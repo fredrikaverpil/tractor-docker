@@ -38,7 +38,9 @@ services:
       restart: always
       ports:
         - "80:80"
+        - "80/udp:80/udp"
         - "9005:9005"
+        - "9180:9180"
       volumes_from:
         - data
       command: /opt/pixar/Tractor-2.2/bin/tractor-engine --configdir=/opt/pixar/config --log=/var/log/engine.log --debug --verbose

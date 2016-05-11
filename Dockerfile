@@ -10,6 +10,7 @@ EXPOSE 9010
 # Tractor
 RUN rpm -ivh /opt/pixar/rpms/Tractor-2.2_1590950-linuxRHEL6_gcc44icc121.x86_64.rpm
 EXPOSE 80
+EXPOSE 80/udp
 EXPOSE 9005
 
 # Additional tools
