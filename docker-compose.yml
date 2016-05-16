@@ -18,7 +18,7 @@ services:
         - ./assets/etc/supervisor:/etc/supervisor
         - ./assets/opt/pixar/license:/opt/pixar/license
         - ./assets/opt/pixar/config:/opt/pixar/config
-
+        - /etc/localtime:/etc/localtime:ro
     license:
       image: tractor_image:2.2.1590950
       container_name: pixar-license
