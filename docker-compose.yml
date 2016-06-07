@@ -3,13 +3,13 @@ version: "2"
 services:
     image:
       build: .
-      image: tractor_image:2.2.1590950
+      image: tractor_image:2.2.1614082
       container_name: tractor-image
       volumes:
         - ./assets/opt/pixar/rpms:/opt/pixar/rpms:ro
 
     data:
-      image: tractor_image:2.2.1590950
+      image: tractor_image:2.2.1614082
       container_name: tractor-data
       hostname: tractor-data
       volumes:
@@ -20,7 +20,7 @@ services:
         - ./assets/opt/pixar/config:/opt/pixar/config
         - /etc/localtime:/etc/localtime:ro
     license:
-      image: tractor_image:2.2.1590950
+      image: tractor_image:2.2.1614082
       container_name: pixar-license
       hostname: pixar-license
       restart: always
@@ -32,7 +32,7 @@ services:
       command: /opt/pixar/PixarLicense-LA-11.0/PixarLicenseServer -x /opt/pixar/license/pixar.license -log /var/log/pixar-license.log
 
     engine:
-      image: tractor_image:2.2.1590950
+      image: tractor_image:2.2.1614082
       container_name: tractor-engine
       hostname: tractor-engine
       restart: always
@@ -47,7 +47,7 @@ services:
       #command: /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
 
     blade:
-      image: tractor_image:2.2.1590950
+      image: tractor_image:2.2.1614082
       container_name: tractor-blade # prevents scaling if uncommented
       hostname: tractor-blade
       restart: always

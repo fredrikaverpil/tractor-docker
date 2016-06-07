@@ -8,7 +8,7 @@ RUN rpm -ivh /opt/pixar/rpms/PixarLicense-LA-11.0_1457011-linuxRHEL6_gcc44icc121
 EXPOSE 9010
 
 # Tractor
-RUN rpm -ivh /opt/pixar/rpms/Tractor-2.2_1590950-linuxRHEL6_gcc44icc121.x86_64.rpm
+RUN rpm -ivh /opt/pixar/rpms/Tractor-2.2_1614082-linuxRHEL6_gcc44icc121.x86_64.rpm
 EXPOSE 80
 EXPOSE 80/udp
 EXPOSE 9005
