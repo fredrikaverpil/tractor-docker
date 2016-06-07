@@ -68,6 +68,8 @@ This will build the container image `tractor-image`.
     cd tractor-docker
     docker-compose build
 
+Please note that if you have a large Tractor database already (perhaps you are upgrading), the build command will take ages. Therefore move the database temporarily out of the tractor-docker folder tree prior to building.
+
 ##### 7. Run the compose
 
 This will create and start the `pixar-license`, `tractor-data`, `tractor-engine` and `tractor-blade` containers based on the `tractor-image` container image.
@@ -102,7 +104,9 @@ This will create and start the `pixar-license`, `tractor-data`, `tractor-engine`
 
     docker rm -v tractor-data
 
-##### Backup database data
+##### Backup Docker volume data (Tractor database)
+
+This will back up the entire Tractor database to /backup/backup.tar, while tractor-docker is running.
 
     docker run --rm --volumes-from tractor-data -v $(pwd):/backup centos tar cvf /backup/backup.tar /var/spool/tractor
 
